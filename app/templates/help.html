@@ -1,0 +1,211 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+{{ config['PUBLIC_CONFIG'].site.title }}
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{{ config['PUBLIC_CONFIG'].site.title}}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('HomeView:index') }}">Home</a></li>
+                <li><a href="{{ url_for('HomeView:help') }}">How to use</a></li>
+                <li><a href="{{ url_for('HomeView:supported_devices') }}">Supported devices</a></li>
+                <!-- <li><a href="{{ url_for('HomeView:broadcasters_help') }}">For broadcasters</a></li> -->
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <div class="well">
+        <h2><b>How to use:</b></h2>
+        1) You need a new account.<br>
+        2) Create device(should be at least one device).<br>
+        3) Select channels you need, or you can add your own custom streams.<br>
+        4) Download client application, you can build it in profile page (need to be registered).<br>
+        5) Install and start client.
+    </div>
+</div>
+
+<div class="container">
+    <div class="well">
+        <h2>Keybord shortcuts:</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Shortcut</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span class="label label-default">Esc</span></td>
+                <td>Quit from player</td>
+            </tr>
+            <tr>
+                <td><span class="label label-default">F</span></td>
+                <td>Toggle full screen</td>
+            </tr>
+            <tr>
+                <td><span class="label label-default">Space</span></td>
+                <td>Pause or play stream</td>
+            </tr>
+            <tr>
+                <td><span class="label label-default">M</span></td>
+                <td>Mute and unmute audio</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-default">CTRL</span> +
+                    <span class="label label-default">Arrow Up</span>/
+                    <span class="label label-default">Arrow Down</span>
+                </td>
+                <td>Volume up/down in 1% increments</td>
+            </tr>
+            <tr>
+                <td><span class="label label-default">S</span></td>
+                <td>Activate frame-step mode</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-default">Arrow Up</span>/
+                    <span class="label label-default">Arrow Down</span>
+                </td>
+                <td>Move to previous/next channel</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-default">Arrow Left</span>/
+                    <span class="label label-default">Arrow Right</span>
+                </td>
+                <td>previous/next programs page</td>
+            </tr>
+            <tr>
+                <td>Keypad <span class="label label-default">[0-9]</span></td>
+                <td>Fast move to channel number</td>
+            </tr>
+            <tr>
+                <td>Keypad <span class="label label-default">Enter</span></td>
+                <td>Apply keypad channel number</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-default">Shift</span> +
+                    <span class="label label-default">Arrow Left</span>/
+                    <span class="label label-default">Arrow Right</span>
+                </td>
+                <td>Seek backward/forward 10 seconds</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-default">Alt</span> +
+                    <span class="label label-default">Arrow Left</span>/
+                    <span class="label label-default">Arrow Right</span>
+                </td>
+                <td>Seek backward/forward 1 minute</td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="label label-default">CTRL</span> +
+                    <span class="label label-default">Arrow Left</span>/
+                    <span class="label label-default">Arrow Right</span>
+                </td>
+                <td>Seek backward/forward 10 minutes</td>
+            </tr>
+            <tr>
+                <td><span class="label label-default">F3</span></td>
+                <td>Show/Hide stream statistic</td>
+            </tr>
+            <tr>
+                <td><span class="label label-default">F4<span></td>
+                <td>Show stream description</td>
+            </tr>
+            <tr>
+                <td><span class="label label-default">F5<span></td>
+                <td>Show/Hide programms list</td>
+            </tr>
+            </tbody>
+        </table>
+        <h2>Mouse actions:</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Shortcut</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Left button double click</td>
+                <td>Toggle full screen</td>
+            </tr>
+            <tr>
+                <td>Left button click on programm in list</td>
+                <td>Move to clicked channel</td>
+            </tr>
+            <tr>
+                <td>Left button click on show programs list button</td>
+                <td>Show programs list</td>
+            </tr>
+            <tr>
+                <td>Left button click on hide programs list button</td>
+                <td>Hide programs list</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <p class="keep-left">Exclusive Partners:
+                {% for partner in config['PUBLIC_CONFIG'].support.partners %}
+            <li><a href="{{ partner.website }}">{{ partner.company }} ({{ partner.country }} region)</a></li>
+            {% endfor %}
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <p class="keep-left">Address: {{config['PUBLIC_CONFIG'].support.contact_address }}</p>
+            <p class="keep-left">Copyright © 2014-2019
+                <a href="{{ config['PUBLIC_CONFIG'].company.domain }}">
+                    {{ config['PUBLIC_CONFIG'].company.title }}
+                </a>. All rights reserved.
+            </p>
+            <p> Website development -
+                <a href="/">
+                    <img src="{{ url_for('static', filename='assets/images/fastogt.png') }}">
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
+{% endblock %}

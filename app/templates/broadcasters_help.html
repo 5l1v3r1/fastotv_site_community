@@ -1,0 +1,121 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+{{ config['PUBLIC_CONFIG'].site.title }}
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{{ config['PUBLIC_CONFIG'].site.title}}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('HomeView:index') }}">Home</a></li>
+                <li><a href="{{ url_for('HomeView:help') }}">How to use</a></li>
+                <li><a href="{{ url_for('HomeView:supported_devices') }}">Supported devices</a></li>
+                <!-- <li><a href="{{ url_for('HomeView:broadcasters_help') }}">For broadcasters</a></li> -->
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <div class="well">
+        <p><b>BECOME A BROADCASTER AND DELIVER YOUR CONTENT TO THE GLOBAL MARKET.</b></p>
+        <p>
+            <b>E-mail:
+                <a href="mailto:{{config['PUBLIC_CONFIG'].support.contact_email }}">
+                    {{config['PUBLIC_CONFIG'].support.contact_email }}
+                </a>
+            </b>
+            </br>
+            <b>IPTV providers group:
+                <a href="{{ config['PUBLIC_CONFIG'].support.community_channel }}">Start IPTV</a>
+            </b>
+        </p>
+    </div>
+    <div class="well">
+        <h2>Create your own IPTV brand from scratch:</h2>
+        <h4>Installation:</h4>
+        <ul>
+            <li>Buy domain ~15$ 1 year</li>
+            <li>Buy hosting(VPS) ~60$ 1 year</li>
+            <li>Install <a href="https://github.com/fastogt/iptv">IPTV service</a></li>
+            <li>Install <a href="https://github.com/fastogt/iptv_admin">IPTV panel</a></li>
+            <li>Setup {{ config['PUBLIC_CONFIG'].site.title}} website</li>
+        </ul>
+        <h4>Preparation:</h4>
+        <ul>
+            <li>Buy channels/vods from providers (1 channel cost depends on location, 12$-50$ per 1 year)</li>
+            <li>Setup channels/vods in IPTV panel</li>
+            <li>Connect payment system (Payment services fee depend on provider, for example you are selling
+                subscription per year for 100$, payment provider fee average is 10$ + country fee, if subscriber pays
+                110$ you will receive on your bank account 90$)
+            </li>
+            <li>Brand players and website with own resources</li>
+            <li>Start IPTV service</li>
+        </ul>
+        <h4>Promotion:</h4>
+        <ul>
+            <li>Promote your own IPTV brand (Reddit/Google AdWords/Facebook Ad/Social accounts).</li>
+        </ul>
+        </br>
+        <h3><b>Conclusions:</b></h3>
+        <p>You can start your own IPTV brand for less than 200$ per year, preparation of all IT infrastructure will take
+            about 4 hours, preparation of new brand will take 1 week.</p>
+        <p><b>What are you waiting for?</b></p>
+        <p>
+            If you need our help it costs 2000$ and include:
+        </p>
+        <ul>
+            <li>Setup services</li>
+            <li>Branding webisite/players</li>
+            <li>Sign webisite and players packages, you need to buy certificates(Android/Apple/Windows/Smart TV)</li>
+            <li>Consultations</li>
+        </ul>
+        <p><b>Note:</b> The connection of your payment system to your website will depend on complexity of payment
+            system
+            api (average 1000$).</p>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <p class="keep-left">Address: {{config['PUBLIC_CONFIG'].support.contact_address }}</p>
+            <p class="keep-left">Copyright © 2014-2019
+                <a href="{{ config['PUBLIC_CONFIG'].company.domain }}">
+                    {{ config['PUBLIC_CONFIG'].company.title }}
+                </a>. All rights reserved.
+            </p>
+            <p> Website development -
+                <a href="/">
+                    <img src="{{ url_for('static', filename='assets/images/fastogt.png') }}">
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
+{% endblock %}

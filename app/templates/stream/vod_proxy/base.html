@@ -1,0 +1,65 @@
+{% from 'bootstrap/wtf.html' import form_field %}
+{% macro render_bootstrap_field(field) %}
+<div class="row">
+    <label class="col-md-4">{{ field.label }}</label>
+    <div class="col-md-8">
+        {{ field(class='form-control')|safe }}
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_bootstrap_form(form) %}
+<div class="row">
+    <label class="col-md-4">{{ form.label }}</label>
+    <div class="col-md-8">
+        {{ form() }}
+    </div>
+</div>
+{% endmacro %}
+
+<form id="stream_entry_form" name="stream_entry_form" class="form" method="post">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+            {% block title %}
+            {% endblock %}
+        </h4>
+    </div>
+    <div class="modal-body">
+        {{ form.hidden_tag() }}
+        <br>
+        {{ render_bootstrap_field(form.name) }}
+        <br>
+        {{ render_bootstrap_field(form.tvg_logo) }}
+        <br>
+        {{ render_bootstrap_field(form.vod_type) }}
+        <br>
+        {{ render_bootstrap_field(form.group) }}
+        <br>
+        {{ render_bootstrap_field(form.description) }}
+        <br>
+        {{ render_bootstrap_field(form.trailer_url) }}
+        <br>
+        {{ render_bootstrap_field(form.user_score) }}
+        <br>
+        {{ render_bootstrap_field(form.prime_date) }}
+        <br>
+        {{ render_bootstrap_field(form.country) }}
+        <br>
+        {{ render_bootstrap_field(form.duration) }}
+        <br>
+        {{ render_bootstrap_form(form.output) }}
+        <br>
+        {{ render_bootstrap_form(form.visible) }}
+        <br>
+        {{ render_bootstrap_field(form.iarc) }}
+    </div>
+    <div class="modal-footer">
+        {% block footer %}
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+        {{ form_field(form.submit, class="btn btn-success") }}
+        {% endblock %}
+    </div>
+</form>

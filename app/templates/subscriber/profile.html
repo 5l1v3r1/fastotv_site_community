@@ -1,0 +1,161 @@
+{% extends 'layouts/layout_user.html' %}
+{% block title %}
+Profile | {{ config['PUBLIC_CONFIG'].site.title }}
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1 class="panel-title">
+            <a href="{{ url_for('HomeView:index') }}">{{ config['PUBLIC_CONFIG'].site.title }}</a>
+        </h1>
+    </div>
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row well">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p>Welcome {{ current_user.email }}</p>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="{{ url_for('SubscriberView:logout') }}" class="btn btn-warning" role="button">
+                            Logout
+                        </a>
+                    </div>
+                    <div class="col-md-1">
+                        <a href="{{ url_for('SubscriberView:remove') }}" class="btn btn-danger" role="button">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row well-sm">
+                <div class="row">
+                    <div class="alert alert-success">Nice to see you <strong>{{ current_user.email }}</strong></div>
+                </div>
+            </div>
+            <div class="row well">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            1) Please create a device.
+                        </div>
+                        <div class="col-sm-6">
+                            <form action="{{ url_for('SubscriberView:devices') }}" method="get">
+                                <button type="submit" class="btn btn-primary pull-right">Devices</button>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            2) Choose channels for watching (all streams you can find <a
+                                href="https://github.com/freearhey/iptv">here</a>).
+                        </div>
+                        <div class="col-sm-6">
+                            <form action="{{ url_for('SubscriberView:channels') }}" method="get">
+                                <button type="submit" class="btn btn-primary pull-right">Website channels</button>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            3) (Optional) Add own streams.
+                        </div>
+                        <div class="col-sm-6">
+                            <form action="{{ url_for('SubscriberView:my_channels') }}" method="get">
+                                <button type="submit" class="btn btn-primary pull-right">My channels</button>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            4) Download installer
+                        </div>
+                        <div class="col-sm-6">
+                            <form action="{{ url_for('SubscriberView:downloads') }}" method="get">
+                                <button type="submit" class="btn btn-primary pull-right">Downloads</button>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            5) (PC version) Add user section into config file: (~/.fastotv/fastotv.ini).
+                        </div>
+                        <div class="col-sm-6">
+                            {% if current_user.devices|length == 0 %}
+                            {% else %}
+                            <select class="btn btn-success pull-right" onchange=OnDeviceChanged(this.value);>
+                                {% for device in current_user.devices %}
+                                <option value="{{ device.id }}">{{ device.name }}</option>
+                                {% endfor %}
+                            </select>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <br>
+                    {% if current_user.devices|length == 0 %}
+                    <div class="alert alert-danger">
+                        To start player you should have at least 1 device, please add it.
+                    </div>
+                    {% else %}
+                    <div class="alert alert-success">
+                        [server_options]<br>
+                        server={{ config.SUBSCRIBERS_PORTAL_SERVER }}<br>
+                        [user_options]<br>
+                        login={{ current_user.email }}<br>
+                        password={{ current_user.password }}<br>
+                        device_id=<span id="device_id">{{current_user.devices[0].id}}</span><br>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <strong>
+                                6) Start application and enjoy watching.
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript"
+        src="{{ url_for('static', filename='assets/js/socket.io/1.7.4/socket.io.min.js') }}"></script>
+<script type="text/javascript" charset="utf-8">
+    function OnDeviceChanged(value){
+        var device_id = $('#device_id');
+        device_id.text(value);
+    }
+    function on_total_price_update() {
+        var arr = $('[name=official_channel]');
+        var total = $('#total');
+        var official_ids = $('#official_ids');
+        var sum = 0;
+        var selected_official_id = [];
+        for (var i = 0; i < arr.length; i++) {
+            var checkbox = arr[i];
+            if (checkbox.checked) {
+                sum += parseFloat(checkbox.value);
+                var cid = checkbox.getAttribute('channel_id');
+                selected_official_id.push(cid);
+            }
+        }
+        total.value = sum;
+        official_ids.val(JSON.stringify(selected_official_id));
+    }
+
+
+</script>
+{% endblock %}

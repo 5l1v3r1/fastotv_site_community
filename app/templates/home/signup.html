@@ -1,0 +1,66 @@
+{% extends 'layouts/layout_home.html' %}
+{% block title %}
+Signup | {{ config['PUBLIC_CONFIG'].site.title }}
+{% endblock %}
+
+{% block content %}
+<div class="container center-block">
+    <div class="panel panel-default text-center">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                <a href="{{ url_for('HomeView:index') }}">
+                    {{ config['PUBLIC_CONFIG'].site.title }}
+                </a>
+            </h1>
+        </div>
+        <div class="panel-body">
+            <h3>Sign Up</h3>
+            <p>Note: Your data isn't going anywhere.</p>
+            {{ util.flashed_messages(dismissible=True, container=False) }}
+            <form action="" method="post" class="form" role="form">
+                {{ form.hidden_tag() }}
+                <div class="form-group  required text-left">
+                    <label class="control-label" for="first_name">{{ form.first_name.label }}</label>
+                    <input class="form-control" id="first_name" name="first_name"
+                           placeholder="Enter first name." required value="">
+                </div>
+                <br>
+                <div class="form-group  required text-left">
+                    <label class="control-label" for="last_name">{{ form.last_name.label }}</label>
+                    <input class="form-control" id="last_name" name="last_name"
+                           placeholder="Enter last name." required value="">
+                </div>
+                <br>
+                <div class="form-group  required text-left">
+                    <label class="control-label" for="email">{{ form.email.label }}</label>
+                    <input class="form-control" id="email" name="email"
+                           placeholder="Your registered email." required type="text" value="">
+                </div>
+                <br>
+                <div class="form-group  required text-left">
+                    <label class="control-label" for="password">{{ form.password.label }}</label>
+                    <input class="form-control" id="password" name="password"
+                           placeholder="Enter a password." required type="password" value="">
+                </div>
+                <br>
+                <div class="form-group  required text-left hide">
+                    {{ render_bootstrap_field(form.status) }}
+                </div>
+                <br>
+                <div class="form-group  required text-left">
+                    {{ render_bootstrap_field(form.country) }}
+                </div>
+                {{ form_field(form.apply, class="btn") }}
+            </form>
+        </div>
+        <div class="panel-footer text-left">Have an account?
+            <a class="pull-right" href={{ url_for('HomeView:signin') }}><b>Sign in</b></a>
+        </div>
+    </div>
+    <div class="text-center">
+        <a class="back-to-site" href="{{ url_for('HomeView:index') }}">
+            &#8592;&nbsp;Home {{ config['PUBLIC_CONFIG'].site.title }}
+        </a>
+    </div>
+</div>
+{%- endblock %}

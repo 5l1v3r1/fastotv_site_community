@@ -1,0 +1,16 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+Page not found | {{ config['PUBLIC_CONFIG'].site.title }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row well">
+        <h1>Page Not Found</h1>
+        <p>What you were looking for is just not there.</p>
+        <p>
+            <a href="{{ url_for('HomeView:index') }}">go somewhere nice</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

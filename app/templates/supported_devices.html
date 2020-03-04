@@ -1,0 +1,121 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+{{ config['PUBLIC_CONFIG'].site.title }}
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{{ config['PUBLIC_CONFIG'].site.title}}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('HomeView:index') }}">Home</a></li>
+                <li><a href="{{ url_for('HomeView:help') }}">How to use</a></li>
+                <li><a href="{{ url_for('HomeView:supported_devices') }}">Supported devices</a></li>
+                <!-- <li><a href="{{ url_for('HomeView:broadcasters_help') }}">For broadcasters</a></li> -->
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <div class="well">
+        <ul>
+            <li>
+                <a href="http://www.orangepi.org"><b>Orange PI:</b></a>
+                <ul>
+                    <li><a href="http://www.orangepi.org/orangepione"><b>Orange PI One</b></a></li>
+                    <li><a href="http://www.orangepi.org/orangepilite"><b>Orange Pi Lite</b></a></li>
+                    <li><a href="http://www.orangepi.org/orangepipc"><b>Orange PI PC</b></a></li>
+                    <li><a href="http://www.orangepi.org/orangepiplus2"><b>Orange Pi Plus2</b></a></li>
+
+                    <li><a href="http://www.orangepi.org/orangepipc2"><b>Orange PI PC2</b></a></li>
+                    <li><a href="http://www.orangepi.org/OrangePiZeroPlus2"><b>Orange Pi Zero Plus2</b></a></li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="http://www.banana-pi.org"><b>Banana PI:</b></a>
+                <ul>
+                    <li><a href="http://www.banana-pi.org/m2plus.html"><b>Banana Pi M2+</b></a></li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="https://www.raspberrypi.org"><b>Raspberry PI:</b></a>
+                <ul>
+                    <li><a href="https://www.raspberrypi.org/products/model-b-plus"><b>Raspberry Pi 1 Model B+</b></a>
+                    </li>
+                    <li><a href="https://www.raspberrypi.org/products/raspberry-pi-2-model-b"><b>Raspberry Pi 2 Model
+                                B</b></a></li>
+                    <li><a href="https://www.raspberrypi.org/products/raspberry-pi-3-model-b"><b>Raspberry Pi 3 Model
+                                B</b></a></li>
+                </ul>
+            </li>
+            <li>
+                <b>PC (Windows, Linux, MacOSX, FreeBSD)</b>
+            </li>
+            <li>
+                <b>Android</b>
+            </li>
+            <li>
+                <b>IPhone</b>
+            </li>
+        </ul>
+        <p>
+            If you didn't find your device please write <a href="{{ config['PUBLIC_CONFIG'].project.github.issues }}">issue</a>
+            and we will add support for it!
+        </p>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <p class="keep-left">Exclusive Partners:
+                {% for partner in config['PUBLIC_CONFIG'].support.partners %}
+            <li><a href="{{ partner.website }}">{{ partner.company }} ({{ partner.country }} region)</a></li>
+            {% endfor %}
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <p class="keep-left">Address: {{config['PUBLIC_CONFIG'].support.contact_address }}</p>
+            <p class="keep-left">Copyright © 2014-2019
+                <a href="{{ config['PUBLIC_CONFIG'].company.domain }}">
+                    {{ config['PUBLIC_CONFIG'].company.title }}
+                </a>. All rights reserved.
+            </p>
+            <p> Website development -
+                <a href="/">
+                    <img src="{{ url_for('static', filename='assets/images/fastogt.png') }}">
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
+{% endblock %}

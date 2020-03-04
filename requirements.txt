@@ -1,0 +1,13 @@
+flask>=1.0.0
+flask_socketio>=1.0
+flask_pymodm>=0.1.2
+flask_login>=0.3.0
+flask_mail>=0.7.1
+flask_bootstrap>=3.3.7.1
+flask_classy>=0.6.10
+validate_email>=1.0
+requests>=1.0.0
+wtforms>=2.0
+python-dateutil>=2.1
+gevent>=1.1.0
+git+git://github.com/fastogt/pyfastocloud_models@master#egg=pyfastocloud_models

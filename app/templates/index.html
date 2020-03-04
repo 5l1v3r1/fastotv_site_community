@@ -1,0 +1,153 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+{{ config['PUBLIC_CONFIG'].site.title }}
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='assets/css/index.css') }}"/>
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{{ config['PUBLIC_CONFIG'].site.title}}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ url_for('HomeView:index') }}">Home</a></li>
+                <li><a href="{{ url_for('HomeView:help') }}">How to use</a></li>
+                <li><a href="{{ url_for('HomeView:supported_devices') }}">Supported devices</a></li>
+                <!-- <li><a href="{{ url_for('HomeView:broadcasters_help') }}">For broadcasters</a></li> -->
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <div class="jumbotron text-center">
+        <h2>{{ config['PUBLIC_CONFIG'].site.small_description }}</h2>
+        <div class="col-md-6">
+            <a href={{ url_for('HomeView:signin') }} class="btn btn-warning">Sign In</a>
+        </div>
+        <div class="col-md-6">
+            <a href={{ url_for('HomeView:signup') }} class="btn btn-warning">Sign Up</a>
+        </div>
+    </div>
+    <div class="well">
+        <div class="row">
+            <h2>What is {{ config['PUBLIC_CONFIG'].site.title }}? </h2>
+            <p>
+                {{ config['PUBLIC_CONFIG'].site.title }} it is iptv platform, for watching TV via internet.
+                Currently we support next
+                platforms:
+            </p>
+            <ul>
+                <li>MacOSX</li>
+                <li>Linux</li>
+                <li>Windows</li>
+                <li>Embedded Linux</li>
+                <li>Android</li>
+                <li>IPhone</li>
+            </ul>
+            <h2 style="color:red;">Downloads available after signup.</h2>
+        </div>
+
+        <div class="row">
+            <p>
+                You can use our player for watching tv channels.
+                Also {{ config['PUBLIC_CONFIG'].site.title }} is open and free IPTV platform.
+            </p>
+            <p>
+                Main big advantages of {{ config['PUBLIC_CONFIG'].site.title }}:
+            </p>
+            <ul>
+                <li style="color:green;">More than 10000 free channels after signup.</li>
+                <li><a href="{{ config['PUBLIC_CONFIG'].project.github.repo }}">Opensource</a></li>
+                <li>Own <a href="https://github.com/fastogt/iptv">opensource iptv service</a></li>
+                <li>One remote control for device and TV</li>
+                <li>
+                    Low price devices, you can buy device by your self and install application on it.<br/>
+                    Now we support next <a href="{{ url_for('HomeView:supported_devices') }}"><b> devices</b></a>.
+                </li>
+                <li>Cross-platform</li>
+                <li>Simple code</li>
+                <li><a href="{{ config['PUBLIC_CONFIG'].company.domain }}">Great solutions</a></li>
+            </ul>
+            <p>PC/RaspberryPI/BananaPI/OrangePI:</p>
+            <img src="{{ url_for('static', filename='images/promo/pc.png') }}" width="50%">
+            <p>
+            <p>Android:</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="{{ url_for('static', filename='images/promo/android.png') }}" width="50%">
+                </div>
+            </div>
+            </br>
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='images/promo/android_categories.png') }}" width="50%">
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ url_for('static', filename='images/promo/android_vods.jpg') }}" width="50%">
+                </div>
+            </div>
+            <p>
+                We are waiting for your feedback! Please write any issues and proposals to
+                <a href="{{ config['PUBLIC_CONFIG'].project.github.issues }}">GitHub Issues</a>.
+            </p>
+            <a class="button transparent white" href="{{ url_for('HomeView:help') }}">How to use</a>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <p class="keep-left">Exclusive Partners:
+                {% for partner in config['PUBLIC_CONFIG'].support.partners %}
+            <li><a href="{{ partner.website }}">{{ partner.company }} ({{ partner.country }} region)</a></li>
+            {% endfor %}
+            </p>
+            <p class="keep-left">Brands:
+                {% for brand in config['PUBLIC_CONFIG'].support.brands %}
+            <li><a href="{{ brand.website }}">{{ brand.name }} ({{ brand.country }})</a></li>
+            {% endfor %}
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="jumbotron text-center">
+            <p class="keep-left">Address: {{config['PUBLIC_CONFIG'].support.contact_address }}</p>
+            <p class="keep-left">Copyright © 2014-2019
+                <a href="{{ config['PUBLIC_CONFIG'].company.domain }}">
+                    {{ config['PUBLIC_CONFIG'].company.title }}
+                </a>. All rights reserved.
+            </p>
+            <p> Website development -
+                <a href="/">
+                    <img src="{{ url_for('static', filename='assets/images/fastogt.png') }}">
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='assets/js/script.js') }}"></script>
+{% endblock %}
